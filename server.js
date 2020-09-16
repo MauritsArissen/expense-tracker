@@ -8,4 +8,18 @@ app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.listen(9000);
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => console.log("Server is online"));
+
+exports.stop = () => {
+    console.log('Stopping server...');
+    server.close(() => {
+        console.log('Server stopped!');
+        process.exit(0);
+    })
+}
+
+if (require.main === module) {
+    process.on('SIGINT', this.stop);
+    process.on('SIGTERM', this.stop);
+}
