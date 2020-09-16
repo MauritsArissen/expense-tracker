@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer'
 
 const initialState = {
-    transactions: []
+    transactions: JSON.parse(localStorage.getItem('transactions')) || []
 }
 
 export const GlobalContext = createContext(initialState);
@@ -23,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
             payload: transaction
         });
     }
-
+    
     return (<GlobalContext.Provider value={{
         transactions: state.transactions,
         deleteTransaction,

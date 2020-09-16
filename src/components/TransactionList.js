@@ -6,6 +6,8 @@ import { GlobalContext } from '../context/GlobalState';
 export const TransactionList = () => {
     const { transactions } = useContext(GlobalContext);
 
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+
     return (
         <>
             <h3>History</h3>
